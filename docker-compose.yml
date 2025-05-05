@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  library-app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:h2:mem:librarydb
+    networks:
+      - library-network
+
+networks:
+  library-network:
+    driver: bridge
