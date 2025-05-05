@@ -1,7 +1,7 @@
 package com.example.library.controller;
 
 import com.example.library.model.Loan;
-import com.example.library.service.LibraryService;
+import com.example.library.service.interfaces.LoanService;
 
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -10,30 +10,30 @@ import java.util.List;
 @RequestMapping("/api/loans")
 public class LoanController {
 
-    private final LibraryService libraryService;
+    private final LoanService loanService;
     
    
-    public LoanController(LibraryService libraryService) {
-        this.libraryService = libraryService;
+    public LoanController(LoanService loanService) {
+        this.loanService = loanService;
     }
     
     @GetMapping
     public List<Loan> getAllLoans() {
-        return libraryService.getAllLoans();
+        return loanService.getAllLoans();
     }
     
     @GetMapping("/{id}")
     public Loan getLoanById(@PathVariable Long id) {
-        return libraryService.getLoanById(id);
+        return loanService.getLoanById(id);
     }
     
     @PostMapping
     public Loan createLoan(@RequestBody Loan loan) {
-        return libraryService.createLoan(loan);
+        return loanService.createLoan(loan);
     }
     
     @PutMapping("/{id}/return")
     public Loan returnBook(@PathVariable Long id) {
-        return libraryService.returnBook(id);
+        return loanService.returnBook(id);
     }
 }

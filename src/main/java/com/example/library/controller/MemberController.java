@@ -1,7 +1,7 @@
 package com.example.library.controller;
 
 import com.example.library.model.Member;
-import com.example.library.service.LibraryService;
+import com.example.library.service.interfaces.MemberService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -9,35 +9,35 @@ import java.util.List;
 @RequestMapping("/api/members")
 public class MemberController {
 
-    private final LibraryService libraryService;
+    private final MemberService memberService;
     
     
-    public MemberController(LibraryService libraryService) {
-        this.libraryService = libraryService;
+    public MemberController(MemberService memberService) {
+        this.memberService = memberService;
     }
     
     @GetMapping
     public List<Member> getAllMembers() {
-        return libraryService.getAllMembers();
+        return memberService.getAllMembers();
     }
     
     @GetMapping("/{id}")
     public Member getMemberById(@PathVariable Long id) {
-        return libraryService.getMemberById(id);
+        return memberService.getMemberById(id);
     }
     
     @PostMapping
     public Member createMember(@RequestBody Member member) {
-        return libraryService.createMember(member);
+        return memberService.createMember(member);
     }
     
     @PutMapping("/{id}")
     public Member updateMember(@PathVariable Long id, @RequestBody Member member) {
-        return libraryService.updateMember(id, member);
+        return memberService.updateMember(id, member);
     }
     
     @DeleteMapping("/{id}")
     public void deleteMember(@PathVariable Long id) {
-        libraryService.deleteMember(id);
+        memberService.deleteMember(id);
     }
 }

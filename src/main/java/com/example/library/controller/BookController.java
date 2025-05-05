@@ -2,6 +2,8 @@ package com.example.library.controller;
 
 import com.example.library.model.Book;
 import com.example.library.service.LibraryService;
+import com.example.library.service.interfaces.BookService;
+
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -9,34 +11,34 @@ import java.util.List;
 @RequestMapping("/api/books")
 public class BookController {
 
-    private final LibraryService libraryService;
+    private final BookService bookService;
 
-    public BookController(LibraryService libraryService) {
-        this.libraryService = libraryService;
+    public BookController(BookService bookService) {
+        this.bookService = bookService;
     }
     
     @GetMapping
     public List<Book> getAllBooks() {
-        return libraryService.getAllBooks();
+        return bookService.getAllBooks();
     }
     
     @GetMapping("/{id}")
     public Book getBookById(@PathVariable Long id) {
-        return libraryService.getBookById(id);
+        return bookService.getBookById(id);
     }
     
     @PostMapping
     public Book createBook(@RequestBody Book book) {
-        return libraryService.createBook(book);
+        return bookService.createBook(book);
     }
     
     @PutMapping("/{id}")
     public Book updateBook(@PathVariable Long id, @RequestBody Book book) {
-        return libraryService.updateBook(id, book);
+        return bookService.updateBook(id, book);
     }
     
     @DeleteMapping("/{id}")
     public void deleteBook(@PathVariable Long id) {
-        libraryService.deleteBook(id);
+        bookService.deleteBook(id);
     }
 }
